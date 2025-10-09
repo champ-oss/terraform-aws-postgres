@@ -1,18 +1,18 @@
 resource "aws_iam_role" "pg_enhanced_monitoring" {
-  count  = var.enabled ? 1 : 0
+  count              = var.enabled ? 1 : 0
   name_prefix        = "pg-rds-enhanced-monitoring-"
   assume_role_policy = data.aws_iam_policy_document.pg_rds_enhanced_monitoring[0].json
   tags               = merge(local.tags, var.tags)
 }
 
 resource "aws_iam_role_policy_attachment" "pg_rds_enhanced_monitoring" {
-  count  = var.enabled ? 1 : 0
+  count      = var.enabled ? 1 : 0
   role       = aws_iam_role.pg_enhanced_monitoring[0].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
 }
 
 data "aws_iam_policy_document" "pg_rds_enhanced_monitoring" {
-  count  = var.enabled ? 1 : 0
+  count = var.enabled ? 1 : 0
   statement {
     actions = ["sts:AssumeRole"]
     principals {
@@ -34,7 +34,7 @@ data "aws_iam_policy_document" "assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
     principals {
-      type        = "Service"
+      type = "Service"
       identifiers = [
         "scheduler.amazonaws.com",
         "rds.amazonaws.com"

@@ -291,9 +291,9 @@ variable "seconds_until_auto_pause" {
 }
 
 variable "enable_backup" {
-    description = "Enable backup module"
-    type        = bool
-    default     = false
+  description = "Enable backup module"
+  type        = bool
+  default     = false
 }
 
 variable "enable_continuous_backup" {
