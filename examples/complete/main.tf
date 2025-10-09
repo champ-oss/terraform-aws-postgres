@@ -41,7 +41,7 @@ resource "aws_security_group" "test" {
 variable "enabled" {
   description = "Enable module"
   type        = bool
-  default     = false
+  default     = true
 }
 
 module "this" {
