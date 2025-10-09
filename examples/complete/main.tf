@@ -38,9 +38,16 @@ resource "aws_security_group" "test" {
   vpc_id      = data.aws_vpcs.this.ids[0]
 }
 
+variable "enabled" {
+  description = "Enable module"
+  type        = bool
+  default     = false
+}
+
 module "this" {
   source                    = "../../"
-  cluster_identifier_prefix = "terraform-aws-aurora-${random_id.this.hex}"
+  enabled                   = var.enabled
+  cluster_identifier_prefix = "terraform-aws-postgres-${random_id.this.hex}"
   private_subnet_ids        = data.aws_subnets.this.ids
   protect                   = false
   skip_final_snapshot       = true
