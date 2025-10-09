@@ -45,7 +45,6 @@ resource "aws_rds_cluster" "this" {
     ignore_changes = [
       availability_zones,
       final_snapshot_identifier,
-      snapshot_identifier,
       engine_version,
       cluster_identifier_prefix
     ]
