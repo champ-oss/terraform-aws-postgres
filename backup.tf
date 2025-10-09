@@ -1,5 +1,3 @@
-/*
-
 module "backup" {
   source                   = "github.com/champ-oss/terraform-aws-backup.git?ref=v1.0.2-a81b88a"
   enabled                  = var.enabled && var.enable_backup
@@ -12,5 +10,3 @@ module "backup" {
   schedule                 = var.backup_schedule
   tags                     = merge(local.tags, var.tags)
 }
-
-*/
