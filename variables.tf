@@ -332,3 +332,9 @@ variable "monitoring_interval" {
   default     = 60
 }
 
+variable "enable_manual_cluster_snapshot" {
+  description = "Enable creation of a manual snapshot"
+  type        = bool
+  default     = true
+}
+
