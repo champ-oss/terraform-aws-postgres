@@ -46,7 +46,8 @@ resource "aws_rds_cluster" "this" {
       availability_zones,
       final_snapshot_identifier,
       engine_version,
-      cluster_identifier_prefix
+      cluster_identifier_prefix,
+      snapshot_identifier
     ]
   }
 }
