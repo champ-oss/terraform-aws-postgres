@@ -195,12 +195,6 @@ variable "skip_final_snapshot" {
   type        = bool
 }
 
-variable "snapshot_identifier" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#snapshot_identifier"
-  type        = string
-  default     = null
-}
-
 variable "source_region" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#source_region"
   type        = string
