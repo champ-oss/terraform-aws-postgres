@@ -12,7 +12,7 @@ resource "aws_rds_cluster" "this" {
   deletion_protection                 = var.protect
   enable_global_write_forwarding      = var.enable_global_write_forwarding
   enabled_cloudwatch_logs_exports     = ["postgresql"]
-  enable_http_endpoint                = true
+  enable_http_endpoint                = var.enable_http_endpoint
   engine                              = "aurora-postgresql"
   engine_mode                         = "provisioned"
   engine_version                      = var.engine_version
