@@ -28,12 +28,16 @@ resource "aws_rds_cluster" "this" {
   preferred_maintenance_window        = var.preferred_maintenance_window
   replication_source_identifier       = var.replication_source_identifier
   skip_final_snapshot                 = var.skip_final_snapshot
-  snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : local.db_snapshot_source
-  source_region                       = var.source_region
-  storage_type                        = var.storage_type
-  storage_encrypted                   = var.storage_encrypted
-  tags                                = merge(local.tags, var.tags)
-  vpc_security_group_ids              = [aws_security_group.pg[0].id]
+  snapshot_identifier = (
+    length(aws_db_cluster_snapshot_copy.manual_copy) > 0 ?
+    aws_db_cluster_snapshot_copy.manual_copy[0].target_db_cluster_snapshot_identifier :
+    local.db_snapshot_source
+  )
+  source_region          = var.source_region
+  storage_type           = var.storage_type
+  storage_encrypted      = var.storage_encrypted
+  tags                   = merge(local.tags, var.tags)
+  vpc_security_group_ids = [aws_security_group.pg[0].id]
 
   serverlessv2_scaling_configuration {
     max_capacity             = var.max_capacity # increment must be equal to 0.5
@@ -46,10 +50,12 @@ resource "aws_rds_cluster" "this" {
       availability_zones,
       final_snapshot_identifier,
       engine_version,
-      cluster_identifier_prefix,
-      snapshot_identifier
     ]
   }
+
+  depends_on = [
+    aws_db_cluster_snapshot_copy.manual_copy
+  ]
 }
 
 resource "aws_rds_cluster_instance" "this" {

@@ -332,3 +332,9 @@ variable "monitoring_interval" {
   default     = 60
 }
 
+variable "source_automated_snapshot_arn" {
+  description = "ARN of the source automated snapshot to restore from"
+  type        = string
+  default     = null
+}
+
