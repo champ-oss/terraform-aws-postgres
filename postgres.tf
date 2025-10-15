@@ -29,8 +29,8 @@ resource "aws_rds_cluster" "this" {
   replication_source_identifier       = var.replication_source_identifier
   skip_final_snapshot                 = var.skip_final_snapshot
   snapshot_identifier = (
-    length(aws_db_cluster_snapshot_copy.manual_copy) > 0 ?
-    aws_db_cluster_snapshot_copy.manual_copy[0].target_db_cluster_snapshot_identifier :
+    length(aws_rds_cluster_snapshot_copy.manual_copy) > 0 ?
+    aws_rds_cluster_snapshot_copy.manual_copy[0].target_db_cluster_snapshot_identifier :
     local.db_snapshot_source
   )
   source_region          = var.source_region
@@ -54,7 +54,7 @@ resource "aws_rds_cluster" "this" {
   }
 
   depends_on = [
-    aws_db_cluster_snapshot_copy.manual_copy
+    aws_rds_cluster_snapshot_copy.manual_copy
   ]
 }
 

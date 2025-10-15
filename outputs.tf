@@ -79,8 +79,8 @@ output "dms_endpoint_arn" {
 output "manual_snapshot_identifier" {
   description = "The identifier of the manual snapshot created from the automated snapshot"
   value = (
-    length(aws_db_cluster_snapshot_copy.manual_copy) > 0 && var.enabled ?
-    aws_db_cluster_snapshot_copy.manual_copy[0].target_db_cluster_snapshot_identifier :
+    length(aws_rds_cluster_snapshot_copy.manual_copy) > 0 && var.enabled ?
+    aws_rds_cluster_snapshot_copy.manual_copy[0].target_db_cluster_snapshot_identifier :
     null
   )
 }
