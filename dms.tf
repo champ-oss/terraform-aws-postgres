@@ -6,7 +6,7 @@ resource "aws_dms_endpoint" "this" {
   engine_name   = "aurora-postgresql"
   database_name = var.database_name
   password      = random_password.password[0].result
-  port          = 5532
+  port          = aws_rds_cluster.this[0].port
   server_name   = var.dms_endpoint_read_only ? aws_rds_cluster.this[0].reader_endpoint : aws_rds_cluster.this[0].endpoint
   tags          = merge(local.tags, var.tags)
   username      = aws_rds_cluster.this[0].master_username
