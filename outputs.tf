@@ -76,3 +76,7 @@ output "dms_endpoint_arn" {
   value       = var.enabled && var.create_dms_endpoint ? aws_dms_endpoint.this[0].endpoint_arn : ""
 }
 
+output "role_arn" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role#arn"
+  value       = var.enabled ? aws_iam_role.this[0].arn : ""
+}
