@@ -1,6 +1,6 @@
 # attach parameter group to cluster
 resource "aws_rds_cluster_parameter_group" "this" {
-  count       = var.enabled && var.enable_default_cluster_parameter_group ? 1 : 0
+  count       = var.enabled && var.enable_custom_cluster_parameter_group ? 1 : 0
   name_prefix = "${var.git}-cluster-pg"
   family      = "aurora-postgresql16"
   tags        = merge(local.tags, var.tags)
