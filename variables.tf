@@ -46,12 +46,6 @@ variable "database_name" {
   default     = "this"
 }
 
-variable "db_cluster_parameter_group_name" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#db_cluster_parameter_group_name"
-  type        = string
-  default     = null
-}
-
 variable "db_snapshot_source_arn" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier"
   type        = string
@@ -338,7 +332,7 @@ variable "enable_http_endpoint" {
   default     = true
 }
 
-variable "enable_default_cluster_parameter_group" {
+variable "enable_custom_cluster_parameter_group" {
   description = "Enable creation of default cluster parameter group"
   type        = bool
   default     = false
