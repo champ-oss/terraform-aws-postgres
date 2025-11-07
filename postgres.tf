@@ -7,7 +7,7 @@ resource "aws_rds_cluster" "this" {
   copy_tags_to_snapshot               = true
   database_name                       = var.database_name
   db_cluster_instance_class           = var.db_cluster_instance_class
-  db_cluster_parameter_group_name     = var.db_cluster_parameter_group_name != null ? var.db_cluster_parameter_group_name : aws_rds_cluster_parameter_group.this[0].name
+  db_cluster_parameter_group_name     = var.enable_custom_cluster_parameter_group ? aws_rds_cluster_parameter_group.this[0].name : null
   db_subnet_group_name                = aws_db_subnet_group.this[0].id
   deletion_protection                 = var.protect
   enable_global_write_forwarding      = var.enable_global_write_forwarding
