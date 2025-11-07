@@ -337,3 +337,9 @@ variable "enable_http_endpoint" {
   type        = bool
   default     = true
 }
+
+variable "enable_default_cluster_parameter_group" {
+  description = "Enable creation of default cluster parameter group"
+  type        = bool
+  default     = false
+}
