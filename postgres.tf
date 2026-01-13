@@ -1,3 +1,11 @@
+locals {
+  normalized_snapshot_identifier = (
+    can(startswith(var.snapshot_identifier, "arn:"))
+    ? var.snapshot_identifier
+    : null
+  )
+}
+
 resource "aws_rds_cluster" "this" {
   count                               = var.enabled ? 1 : 0
   allow_major_version_upgrade         = var.allow_major_version_upgrade
@@ -28,7 +36,7 @@ resource "aws_rds_cluster" "this" {
   preferred_maintenance_window        = var.preferred_maintenance_window
   replication_source_identifier       = var.replication_source_identifier
   skip_final_snapshot                 = var.skip_final_snapshot
-  snapshot_identifier                 = var.snapshot_identifier != null ? var.snapshot_identifier : local.db_snapshot_source
+  snapshot_identifier                 = local.normalized_snapshot_identifier
   source_region                       = var.source_region
   storage_type                        = var.storage_type
   storage_encrypted                   = var.storage_encrypted
@@ -42,6 +50,19 @@ resource "aws_rds_cluster" "this" {
   }
 
   lifecycle {
+    precondition {
+      condition = (
+        var.snapshot_identifier == null ||
+        var.snapshot_identifier == "" ||
+        can(startswith(var.snapshot_identifier, "arn:"))
+      )
+      error_message = <<EOT
+snapshot_identifier must be null, empty, or a valid snapshot ARN.
+- Leave it null or empty to create a new database.
+- Provide a snapshot ARN to restore.
+EOT
+    }
+
     ignore_changes = [
       availability_zones,
       final_snapshot_identifier,

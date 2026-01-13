@@ -46,12 +46,6 @@ variable "database_name" {
   default     = "this"
 }
 
-variable "db_snapshot_source_arn" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier"
-  type        = string
-  default     = null
-}
-
 variable "deletion_window_in_days" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#deletion_window_in_days"
   type        = number
