@@ -177,12 +177,6 @@ variable "shared_accounts" {
   default     = []
 }
 
-variable "skip_final_snapshot" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
-  default     = false
-  type        = bool
-}
-
 variable "snapshot_identifier" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#snapshot_identifier"
   type        = string

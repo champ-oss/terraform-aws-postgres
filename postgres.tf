@@ -35,7 +35,7 @@ resource "aws_rds_cluster" "this" {
   preferred_backup_window             = var.preferred_backup_window
   preferred_maintenance_window        = var.preferred_maintenance_window
   replication_source_identifier       = var.replication_source_identifier
-  skip_final_snapshot                 = var.skip_final_snapshot
+  skip_final_snapshot                 = false
   snapshot_identifier                 = local.normalized_snapshot_identifier
   source_region                       = var.source_region
   storage_type                        = var.storage_type
@@ -44,8 +44,8 @@ resource "aws_rds_cluster" "this" {
   vpc_security_group_ids              = [aws_security_group.pg[0].id]
 
   serverlessv2_scaling_configuration {
-    max_capacity             = var.max_capacity # increment must be equal to 0.5
-    min_capacity             = var.min_capacity # increment must be equal to 0.5.
+    max_capacity             = var.max_capacity
+    min_capacity             = var.min_capacity
     seconds_until_auto_pause = var.min_capacity != 0 ? null : var.seconds_until_auto_pause
   }
 
@@ -54,13 +54,23 @@ resource "aws_rds_cluster" "this" {
       condition = (
         var.snapshot_identifier == null ||
         var.snapshot_identifier == "" ||
-        can(startswith(var.snapshot_identifier, "arn:"))
+        (
+          can(startswith(var.snapshot_identifier, "arn:")) &&
+          var.protect == false
+        )
       )
       error_message = <<EOT
-snapshot_identifier must be null, empty, or a valid snapshot ARN.
-- Leave it null or empty to create a new database.
-- Provide a snapshot ARN to restore.
-EOT
+        Invalid snapshot restore configuration.
+
+        Allowed values:
+        - snapshot_identifier = null or "" → create or keep existing database
+        - snapshot_identifier = snapshot ARN → restore from snapshot (requires protect = false)
+
+        Restore steps:
+        1. Set protect = false and apply
+        2. Set snapshot_identifier to the snapshot ARN and apply
+        3. Re-enable protect = true and apply
+      EOT
     }
 
     ignore_changes = [
