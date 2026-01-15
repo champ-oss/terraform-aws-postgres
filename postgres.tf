@@ -71,7 +71,7 @@ resource "aws_rds_cluster" "this" {
 
         Restore steps:
         1. Set protect = false and apply
-        2. Set snapshot_identifier to the snapshot ARN and apply
+        2. Set snapshot_identifier to the snapshot ARN and make sure skip_final_snapshot = false, then apply
         3. Re-enable protect = true and apply
       EOT
     }
