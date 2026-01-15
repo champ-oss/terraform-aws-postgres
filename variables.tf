@@ -325,3 +325,9 @@ variable "enable_custom_cluster_parameter_group" {
   type        = bool
   default     = false
 }
+
+variable "skip_final_snapshot" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
+  type        = bool
+  default     = false
+}
