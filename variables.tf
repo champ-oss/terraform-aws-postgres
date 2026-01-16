@@ -46,12 +46,6 @@ variable "database_name" {
   default     = "this"
 }
 
-variable "db_snapshot_source_arn" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/db_snapshot#db_instance_identifier"
-  type        = string
-  default     = null
-}
-
 variable "deletion_window_in_days" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key#deletion_window_in_days"
   type        = number
@@ -181,12 +175,6 @@ variable "shared_accounts" {
   description = "AWS accounts to share the RDS cluster"
   type        = list(string)
   default     = []
-}
-
-variable "skip_final_snapshot" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
-  default     = false
-  type        = bool
 }
 
 variable "snapshot_identifier" {
@@ -334,6 +322,12 @@ variable "enable_http_endpoint" {
 
 variable "enable_custom_cluster_parameter_group" {
   description = "Enable creation of default cluster parameter group"
+  type        = bool
+  default     = false
+}
+
+variable "skip_final_snapshot" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#skip_final_snapshot"
   type        = bool
   default     = false
 }
