@@ -76,3 +76,7 @@ output "dms_endpoint_arn" {
   value       = var.enabled && var.create_dms_endpoint ? aws_dms_endpoint.this[0].endpoint_arn : ""
 }
 
+output "instance_identifiers" {
+  description = "List of RDS Cluster Instance Identifiers"
+  value       = try(aws_rds_cluster_instance.this[*].identifier, [])
+}
