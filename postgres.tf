@@ -77,11 +77,11 @@ resource "aws_rds_cluster" "this" {
 
         Required restore workflow:
 
-        1. Set protect = false and apply
+        1. set protect = false and apply
         2. Set snapshot_identifier to the snapshot ARN
           - ensure skip_final_snapshot = false
           - apply
-        3. Set snapshot_identifier = null (or "")
+        3. Once restore is complete set snapshot_identifier = null (or "")
         4. Re-enable protect = true and apply
 
         This prevents accidental re-restores and allows password rotation after restore.
