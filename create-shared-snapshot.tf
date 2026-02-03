@@ -2,14 +2,16 @@ locals {
   snapshot_version_suffix = "-v${var.shared_snapshot_version}"
 
   max_snapshot_id_length = 63
+  max_cluster_id_length  = local.max_snapshot_id_length - length(local.snapshot_version_suffix)
 
-  # Reserve space for the version suffix
-  max_cluster_id_length = local.max_snapshot_id_length - length(local.snapshot_version_suffix)
-
-  snapshot_base = substr(
-    aws_rds_cluster.this[0].id,
-    0,
-    local.max_cluster_id_length
+  # Guard against aws_rds_cluster being disabled (count = 0)
+  snapshot_base = try(
+    substr(
+      aws_rds_cluster.this[0].id,
+      0,
+      local.max_cluster_id_length
+    ),
+    ""
   )
 }
 
@@ -25,3 +27,4 @@ resource "aws_db_cluster_snapshot" "this" {
   shared_accounts = var.shared_accounts_snapshot
   tags            = merge(local.tags, var.tags)
 }
+
