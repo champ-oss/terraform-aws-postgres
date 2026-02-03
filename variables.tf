@@ -331,3 +331,9 @@ variable "skip_final_snapshot" {
   type        = bool
   default     = false
 }
+
+variable "shared_snapshot_version" {
+  description = "Version tag for the shared snapshot identifier"
+  type        = string
+  default     = "1" # increment to create a new shared snapshot
+}
