@@ -2,7 +2,7 @@
 resource "aws_rds_cluster_parameter_group" "this" {
   count       = var.enabled && var.enable_custom_cluster_parameter_group ? 1 : 0
   name_prefix = "${var.git}-cluster-pg"
-  family      = "aurora-postgresql16"
+  family      = "aurora-postgresql${var.engine_version}"
   tags        = merge(local.tags, var.tags)
 
   parameter {
