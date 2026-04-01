@@ -323,7 +323,7 @@ variable "enable_http_endpoint" {
 variable "enable_custom_cluster_parameter_group" {
   description = "Enable creation of default cluster parameter group"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "skip_final_snapshot" {
