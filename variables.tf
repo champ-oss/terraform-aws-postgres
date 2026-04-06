@@ -321,7 +321,7 @@ variable "enable_http_endpoint" {
 }
 
 variable "enable_custom_cluster_parameter_group" {
-  description = "Enable creation of default cluster parameter group"
+  description = "Enable creation of default cluster parameter group" # setting to false by default as custom parm group disables autopause
   type        = bool
   default     = false
 }
