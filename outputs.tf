@@ -80,3 +80,8 @@ output "instance_identifiers" {
   description = "List of RDS Cluster Instance Identifiers"
   value       = try(aws_rds_cluster_instance.this[*].identifier, [])
 }
+
+output "iam_role_arn" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role#arn"
+  value       = var.enabled && var.create_iam_role ? aws_iam_role.this[0].arn : ""
+}
