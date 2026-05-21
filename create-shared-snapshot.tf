@@ -1,3 +1,4 @@
+# making sure snapshot is different when flipping flag
 resource "aws_db_cluster_snapshot" "this" {
   count                 = var.enable_shared_snapshot && var.enabled ? 1 : 0
   db_cluster_identifier = aws_rds_cluster.this[0].id
