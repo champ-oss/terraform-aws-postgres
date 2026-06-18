@@ -61,7 +61,7 @@ variable "enable_global_write_forwarding" {
 variable "engine_version" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#engine_version"
   type        = string
-  default     = "16.8"
+  default     = "16"
 }
 
 variable "final_snapshot_identifier" {
