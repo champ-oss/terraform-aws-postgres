@@ -21,4 +21,8 @@ resource "random_string" "snapshot" {
   length  = 5
   special = false
   upper   = false
+
+  keepers = {
+    trigger = var.shared_snapshot_trigger
+  }
 }
