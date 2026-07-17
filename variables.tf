@@ -302,6 +302,12 @@ variable "enable_shared_snapshot" {
   default     = false
 }
 
+variable "shared_snapshot_trigger" {
+  description = "Changing this value will trigger a new snapshot to be created"
+  type        = string
+  default     = null
+}
+
 variable "db_cluster_instance_class" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#db_cluster_instance_class"
   type        = string
