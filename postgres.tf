@@ -63,28 +63,20 @@ resource "aws_rds_cluster" "this" {
       error_message = <<EOT
         Invalid snapshot restore configuration.
 
-        Rules:
+        Either:
 
-        - snapshot_identifier = null or ""
-        → Create a new cluster or manage an existing one normally
+        - snapshot_identifier = null (or "") for normal operation
 
-        - snapshot_identifier = snapshot ARN
-        → Restore from snapshot (requires protect = false and skip_final_snapshot = false)
+        OR
 
-        Important:
-          - snapshot_identifier MUST be null or "" when protect = true
-          - Snapshot restores are only allowed while protect = false
+        - snapshot_identifier = <snapshot ARN>
+        with:
+          - protect = false
+          - skip_final_snapshot = false
 
-        Required restore workflow:
-
-        1. set protect = false and apply
-        2. Set snapshot_identifier to the snapshot ARN
-          - ensure skip_final_snapshot = false
-          - apply
-        3. Once restore is complete set snapshot_identifier = null (or "")
-        4. Re-enable protect = true and apply
-
-        This prevents accidental re-restores and allows password rotation after restore.
+        After the restore completes:
+        1. Set snapshot_identifier = null and apply.
+        2. Set protect = true and apply.
       EOT
     }
 
