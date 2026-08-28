@@ -331,3 +331,9 @@ variable "skip_final_snapshot" {
   type        = bool
   default     = false
 }
+
+variable "shared_preload_libraries" {
+  description = "One or more shared libraries to be preloaded at server start"
+  type        = string
+  default     = null
+}
