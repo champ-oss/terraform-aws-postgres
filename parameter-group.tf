@@ -37,4 +37,13 @@ resource "aws_rds_cluster_parameter_group" "this" {
       apply_method = "pending-reboot"
     }
   }
+
+  dynamic "parameter" {
+    for_each = var.pgaudit_log_parameter != null ? [1] : []
+    content {
+      name         = "pgaudit.log"
+      value        = var.pgaudit_log_parameter
+      apply_method = "pending-reboot"
+    }
+  }
 }
