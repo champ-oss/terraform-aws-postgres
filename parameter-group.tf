@@ -28,4 +28,10 @@ resource "aws_rds_cluster_parameter_group" "this" {
     value        = "1" # Enabled
     apply_method = "pending-reboot"
   }
+
+  parameter {
+    name         = "shared_preload_libraries"
+    value        = var.shared_preload_libraries
+    apply_method = "pending-reboot"
+  }
 }
