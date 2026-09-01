@@ -337,3 +337,9 @@ variable "shared_preload_libraries" {
   type        = string
   default     = null
 }
+
+variable "pgaudit_log_parameter" {
+  description = "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Appendix.PostgreSQL.CommonDBATasks.pgaudit.basic-setup.html"
+  type        = string
+  default     = null
+}
