@@ -331,3 +331,15 @@ variable "skip_final_snapshot" {
   type        = bool
   default     = false
 }
+
+variable "shared_preload_libraries" {
+  description = "One or more shared libraries to be preloaded at server start"
+  type        = string
+  default     = null
+}
+
+variable "pgaudit_log_parameter" {
+  description = "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Appendix.PostgreSQL.CommonDBATasks.pgaudit.basic-setup.html"
+  type        = string
+  default     = null
+}
