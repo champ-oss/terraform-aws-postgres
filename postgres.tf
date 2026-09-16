@@ -43,6 +43,7 @@ resource "aws_rds_cluster" "this" {
   tags                                = merge(local.tags, var.tags)
   vpc_security_group_ids              = [aws_security_group.pg[0].id]
   performance_insights_enabled        = var.performance_insights_enabled
+  performance_insights_retention_period = var.performance_insights_retention_period
   database_insights_mode              = var.database_insights_mode
 
   serverlessv2_scaling_configuration {
