@@ -118,6 +118,12 @@ variable "network_type" {
   default     = null
 }
 
+variable "cluster_performance_insights_enabled" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#performance_insights_enabled-1"
+  type        = bool
+  default     = false
+}
+
 variable "performance_insights_enabled" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#performance_insights_enabled"
   type        = bool
@@ -340,6 +346,12 @@ variable "shared_preload_libraries" {
 
 variable "pgaudit_log_parameter" {
   description = "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Appendix.PostgreSQL.CommonDBATasks.pgaudit.basic-setup.html"
+  type        = string
+  default     = null
+}
+
+variable "database_insights_mode" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#database_insights_mode-1"
   type        = string
   default     = null
 }
