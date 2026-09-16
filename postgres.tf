@@ -42,6 +42,7 @@ resource "aws_rds_cluster" "this" {
   storage_encrypted                   = var.storage_encrypted
   tags                                = merge(local.tags, var.tags)
   vpc_security_group_ids              = [aws_security_group.pg[0].id]
+  database_insights_mode              = var.database_insights_mode
 
   serverlessv2_scaling_configuration {
     max_capacity             = var.max_capacity
