@@ -42,7 +42,7 @@ resource "aws_rds_cluster" "this" {
   storage_encrypted                     = var.storage_encrypted
   tags                                  = merge(local.tags, var.tags)
   vpc_security_group_ids                = [aws_security_group.pg[0].id]
-  cluster_performance_insights_enabled  = var.cluster_performance_insights_enabled
+  performance_insights_enabled          = var.cluster_performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_retention_period
   database_insights_mode                = var.database_insights_mode
 
