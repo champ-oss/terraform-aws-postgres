@@ -343,3 +343,9 @@ variable "pgaudit_log_parameter" {
   type        = string
   default     = null
 }
+
+variable "database_insights_mode" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#database_insights_mode-1"
+  type        = string
+  default     = null
+}
