@@ -118,6 +118,12 @@ variable "network_type" {
   default     = null
 }
 
+variable "cluster_performance_insights_enabled" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#performance_insights_enabled-1"
+  type        = bool
+  default     = false
+}
+
 variable "performance_insights_enabled" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#performance_insights_enabled"
   type        = bool
