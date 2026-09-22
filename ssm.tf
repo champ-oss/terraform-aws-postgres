@@ -13,6 +13,7 @@ resource "aws_ssm_parameter" "this" {
   }, local.tags, var.tags)
 
   lifecycle {
+    ignore_changes        = [region]
     create_before_destroy = true
   }
 }

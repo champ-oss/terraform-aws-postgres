@@ -95,7 +95,8 @@ resource "aws_rds_cluster" "this" {
       availability_zones,
       final_snapshot_identifier,
       engine_version,
-      cluster_identifier_prefix
+      cluster_identifier_prefix,
+      region,
     ]
   }
 }
@@ -121,7 +122,8 @@ resource "aws_rds_cluster_instance" "this" {
   lifecycle {
     ignore_changes = [
       engine_version,
-      identifier_prefix
+      identifier_prefix,
+      region,
     ]
   }
 }

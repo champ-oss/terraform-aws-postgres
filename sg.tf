@@ -5,6 +5,7 @@ resource "aws_security_group" "pg" {
   tags        = merge(local.tags, var.tags)
 
   lifecycle {
+    ignore_changes        = [region]
     create_before_destroy = true
   }
 }
@@ -18,6 +19,10 @@ resource "aws_security_group_rule" "from_sg" {
   protocol                 = "tcp"
   security_group_id        = aws_security_group.pg[0].id
   source_security_group_id = var.source_security_group_id
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }
 
 resource "aws_security_group_rule" "from_cidr" {
@@ -29,6 +34,10 @@ resource "aws_security_group_rule" "from_cidr" {
   protocol          = "tcp"
   security_group_id = aws_security_group.pg[0].id
   cidr_blocks       = var.cidr_blocks
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }
 
 resource "aws_security_group_rule" "ingress_self" {
@@ -40,6 +49,10 @@ resource "aws_security_group_rule" "ingress_self" {
   protocol                 = "tcp"
   security_group_id        = aws_security_group.pg[0].id
   source_security_group_id = aws_security_group.pg[0].id
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }
 
 resource "aws_security_group_rule" "egress" {
@@ -51,4 +64,8 @@ resource "aws_security_group_rule" "egress" {
   protocol          = "all"
   security_group_id = aws_security_group.pg[0].id
   cidr_blocks       = ["0.0.0.0/0"]
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }

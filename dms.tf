@@ -15,4 +15,8 @@ resource "aws_dms_endpoint" "this" {
     create = "60m"
     delete = "60m"
   }
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }

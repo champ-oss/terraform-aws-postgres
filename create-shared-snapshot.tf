@@ -6,14 +6,18 @@ resource "aws_db_cluster_snapshot" "this" {
     var.db_cluster_snapshot_identifier != null
     ? var.db_cluster_snapshot_identifier
     : substr(
-    "sh-${random_string.snapshot[0].result}-${aws_rds_cluster.this[0].id}",
-    0,
-    63
-  )
+      "sh-${random_string.snapshot[0].result}-${aws_rds_cluster.this[0].id}",
+      0,
+      63
+    )
   )
 
   shared_accounts = var.shared_accounts_snapshot
   tags            = merge(local.tags, var.tags)
+
+  lifecycle {
+    ignore_changes = [region]
+  }
 }
 
 resource "random_string" "snapshot" {

@@ -5,6 +5,6 @@ resource "aws_db_subnet_group" "this" {
   tags        = merge(local.tags, var.tags)
 
   lifecycle {
-    ignore_changes = [name_prefix]
+    ignore_changes = [name_prefix, region]
   }
 }
