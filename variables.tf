@@ -355,3 +355,15 @@ variable "database_insights_mode" {
   type        = string
   default     = null
 }
+
+variable "cluster_create_timeout" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#timeouts (increase for large snapshot restores)"
+  type        = string
+  default     = "120m"
+}
+
+variable "instance_create_timeout" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance#timeouts"
+  type        = string
+  default     = "90m"
+}
