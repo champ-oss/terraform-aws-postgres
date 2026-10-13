@@ -46,6 +46,10 @@ resource "aws_rds_cluster" "this" {
   performance_insights_retention_period = var.performance_insights_retention_period
   database_insights_mode                = var.database_insights_mode
 
+  timeouts {
+    create = var.cluster_create_timeout
+  }
+
   serverlessv2_scaling_configuration {
     max_capacity             = var.max_capacity
     min_capacity             = var.min_capacity
@@ -118,6 +122,11 @@ resource "aws_rds_cluster_instance" "this" {
   publicly_accessible                   = var.publicly_accessible
   preferred_maintenance_window          = var.preferred_maintenance_window
   tags                                  = merge(local.tags, var.tags)
+
+  timeouts {
+    create = var.instance_create_timeout
+  }
+
   lifecycle {
     ignore_changes = [
       engine_version,
